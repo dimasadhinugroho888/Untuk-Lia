@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buat Sarah Aulia Marpaung 💖</title>
   <style>
+    /* Background langit malam */
     body {
       margin: 0;
       padding: 0;
@@ -15,6 +16,7 @@
       text-align: center;
     }
 
+    /* Kanvas bintang */
     canvas {
       position: fixed;
       top: 0;
@@ -22,6 +24,7 @@
       z-index: 0;
     }
 
+    /* Judul utama */
     h1 {
       margin-top: 15vh;
       font-size: 3rem;
@@ -38,6 +41,7 @@
       to { text-shadow: 0 0 30px #ff0080, 0 0 60px #ff0080; }
     }
 
+    /* Teks berjalan seperti diketik */
     .typewriter {
       margin-top: 20px;
       font-size: 1.2rem;
@@ -58,6 +62,7 @@
       50% { border-color: transparent }
     }
 
+    /* Tombol jawaban */
     .btn {
       margin-top: 30px;
       padding: 15px 35px;
@@ -82,13 +87,14 @@
       opacity: 0.6;
     }
 
+    /* Popup surat cinta */
     .popup {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      width: 85%;
-      max-width: 450px;
+      width: 80%;
+      max-width: 400px;
       background: #fff0f5;
       color: #ff2e63;
       padding: 25px;
@@ -112,8 +118,7 @@
       font-size: 1.1rem;
       line-height: 1.5;
       white-space: pre-line;
-      text-align: left;
-      animation: typing 15s steps(200, end) forwards;
+      animation: typing 6s steps(60, end) forwards;
       overflow: hidden;
     }
     .popup button {
@@ -127,6 +132,7 @@
       cursor: pointer;
     }
 
+    /* Sakura flowers */
     .sakura {
       position: fixed;
       top: -10px;
@@ -152,26 +158,15 @@
     <button class="btn no">Tidak</button>
   </div>
 
+  <!-- Popup Surat Cinta -->
   <div class="popup" id="popup">
     <h2>Untuk Sarah 💌</h2>
-    <p id="letterText">
-Sejak pertama kali aku mengenalmu, dunia ini terasa berbeda.  
-Setiap senyummu seperti matahari yang hangat di hari yang dingin.  
-Aku selalu menantikan setiap pesan darimu,  
-setiap tawa dan cerita yang kau bagi membuat hatiku bergetar.  
-
-Aku ingin setiap hari kita dipenuhi kebahagiaan,  
-setiap malam kita dihiasi bintang yang sama,  
-dan setiap langkah kita selalu seirama.  
-
-Aku ingin menjadi sandaranmu saat lelah,  
-teman terbaikmu saat senang,  
-dan pelindungmu saat dunia terasa berat.  
-
-Aku ingin kita menulis cerita kita sendiri,  
-penuh cinta, tawa, dan momen-momen indah yang tak terlupakan.  
-Aku bersedia menunggu jawabanmu dengan sepenuh hati 💖
-    </p>
+    <p id="letterText">Sejak pertama kali aku mengenalmu,  
+duniaku terasa lebih indah.  
+Aku ingin menjalani hari-hari  
+bersamamu dengan penuh cinta  
+dan kebahagiaan.  
+Maukah kamu menjadi milikku selamanya? 💖</p>
     <button onclick="goWhatsApp()">Aku Mau</button>
   </div>
 
@@ -207,9 +202,9 @@ Aku bersedia menunggu jawabanmu dengan sepenuh hati 💖
     // Popup
     function showPopup() {
       document.getElementById("popup").classList.add("active");
+      // Tambah sakura jatuh
       for (let i = 0; i < 10; i++) createSakura();
     }
-
     function goWhatsApp() {
       window.location.href = "https://wa.me/6285179956922?text=Iya%20aku%20mau%20jadi%20milikmu%20selamanya%20💖";
     }

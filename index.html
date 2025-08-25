@@ -5,77 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untuk Lia 💖 </title>
   <style>
+    /* Background langit malam */
     body {
       margin: 0;
+      padding: 0;
       overflow: hidden;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       font-family: 'Poppins', sans-serif;
       color: white;
       text-align: center;
     }
 
-    /* Background langit malam */
-    canvas#stars {
+    /* Kanvas bintang */
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      z-index: -2;
+      z-index: 0;
     }
 
-    /* Efek hati berjatuhan */
-    .heart {
-      position: fixed;
-      top: -10px;
-      color: red;
-      font-size: 20px;
-      animation: fall linear forwards;
-      z-index: -1;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-
-    /* Konten utama */
-    .container {
-      position: relative;
-      top: 30vh;
-    }
-
+    /* Judul utama */
     h1 {
-      font-size: 2.5em;
-      color: #ff99cc;
-      text-shadow: 0 0 20px #ff66cc, 0 0 40px #ff99cc;
+      margin-top: 15vh;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff6ec7;
+      text-shadow: 0 0 20px #ff6ec7, 0 0 40px #ff0080;
       animation: glow 2s ease-in-out infinite alternate;
+      z-index: 2;
+      position: relative;
     }
+
     @keyframes glow {
-      from { text-shadow: 0 0 10px #ff66cc; }
-      to { text-shadow: 0 0 30px #ff3399, 0 0 60px #ff99cc; }
+      from { text-shadow: 0 0 10px #ff6ec7; }
+      to { text-shadow: 0 0 30px #ff0080, 0 0 60px #ff0080; }
     }
 
-    p {
-      font-size: 1.2em;
-      margin: 20px 0;
+    /* Teks berjalan seperti diketik */
+    .typewriter {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      display: inline-block;
+      border-right: 2px solid rgba(255,255,255,0.75);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 6s steps(40, end) forwards, blink 0.75s step-end infinite;
     }
 
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    /* Tombol jawaban */
     .btn {
-      padding: 12px 25px;
-      margin: 15px;
+      margin-top: 30px;
+      padding: 15px 35px;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 25px;
-      font-size: 1em;
+      border-radius: 30px;
       cursor: pointer;
-      color: white;
-      background: linear-gradient(45deg, #ff3399, #ff66cc);
-      box-shadow: 0 4px 15px rgba(255, 51, 153, 0.6);
       transition: 0.3s;
+      z-index: 2;
+      position: relative;
     }
-    .btn:hover {
-      transform: scale(1.1);
+    .yes {
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 0 20px #ff4d6d;
+    }
+    .yes:hover { transform: scale(1.1); }
+    .no {
+      background: gray;
+      color: white;
+      pointer-events: none;
+      opacity: 0.6;
     }
 
     /* Popup surat cinta */
@@ -84,48 +93,56 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      background: white;
-      color: black;
+      width: 80%;
+      max-width: 400px;
+      background: #fff0f5;
+      color: #ff2e63;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 0 20px rgba(255,0,100,0.6);
       text-align: center;
-      max-width: 400px;
-      transition: transform 0.4s ease-in-out;
-      z-index: 10;
+      z-index: 999;
+      opacity: 0;
+      transition: 0.5s ease;
     }
     .popup.active {
       transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    .popup h2 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: #ff2e63;
+    }
+    .popup p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      white-space: pre-line;
+      animation: typing 6s steps(60, end) forwards;
+      overflow: hidden;
+    }
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 20px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
     }
 
-    /* Confetti */
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: randomColor;
-      animation: confettiFall linear forwards;
-    }
-    @keyframes confettiFall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* Sakura/bunga jatuh */
+    /* Sakura flowers */
     .sakura {
       position: fixed;
       top: -10px;
-      font-size: 18px;
-      color: pink;
-      animation: sakuraFall linear forwards;
-      z-index: -1;
+      font-size: 20px;
+      animation: fall linear infinite;
+      z-index: 1;
     }
-    @keyframes sakuraFall {
+    @keyframes fall {
       to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
+        transform: translateY(110vh) rotate(360deg);
       }
     }
   </style>
@@ -133,111 +150,76 @@
 <body>
   <canvas id="stars"></canvas>
 
-  <div class="container">
-    <h1>Hai Sarah Aulia Marpaung 🌸</h1>
-    <p>Aku punya satu pertanyaan penting...<br><br>
-       Maukah kamu menjadi bagian terindah dalam hidupku? 💖</p>
-    <button class="btn" onclick="showPopup()">Iya 💕</button>
-    <button class="btn" onclick="alert('Yakin mau nolak? 😢')">Tidak 😢</button>
+  <h1>Sarah Aulia Marpaung 💖</h1>
+  <div class="typewriter">Maukah kamu menjadi bagian terindah dalam hidupku? ✨</div>
+
+  <div>
+    <button class="btn yes" onclick="showPopup()">Iya</button>
+    <button class="btn no">Tidak</button>
   </div>
 
-  <!-- Popup Surat -->
-  <div id="popup" class="popup">
-    <h2>💌 Untuk Sarah</h2>
-    <p>Terima kasih sudah menerima aku...<br>
-    Kamu adalah bintang di langit malamku ✨</p>
-    <button class="btn" onclick="goToWhatsApp()">Lanjut ke WhatsApp</button>
+  <!-- Popup Surat Cinta -->
+  <div class="popup" id="popup">
+    <h2>Untuk Sarah 💌</h2>
+    <p id="letterText">Sejak pertama kali aku mengenalmu,  
+duniaku terasa lebih indah.  
+Aku ingin menjalani hari-hari  
+bersamamu dengan penuh cinta  
+dan kebahagiaan.  
+Maukah kamu menjadi milikku selamanya? 💖</p>
+    <button onclick="goWhatsApp()">Aku Mau</button>
   </div>
 
   <script>
-    // Background bintang
+    // Bintang bergerak
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    const stars = [];
+    let stars = [];
     for (let i = 0; i < 200; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.5,
-        d: Math.random() * 1
+        radius: Math.random() * 1.5,
+        speed: Math.random() * 0.5
       });
     }
-
     function drawStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "white";
-      ctx.beginPath();
       stars.forEach(star => {
-        ctx.moveTo(star.x, star.y);
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2, true);
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) star.y = 0;
       });
-      ctx.fill();
-      updateStars();
+      requestAnimationFrame(drawStars);
     }
+    drawStars();
 
-    function updateStars() {
-      stars.forEach(star => {
-        star.y += star.d;
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
-      });
-    }
-
-    setInterval(drawStars, 50);
-
-    // Efek hati
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(createHeart, 800);
-
-    // Efek sakura
-    function createSakura() {
-      const sakura = document.createElement("div");
-      sakura.className = "sakura";
-      sakura.innerHTML = "🌸";
-      sakura.style.left = Math.random() * window.innerWidth + "px";
-      sakura.style.animationDuration = (Math.random() * 5 + 3) + "s";
-      document.body.appendChild(sakura);
-      setTimeout(() => sakura.remove(), 7000);
-    }
-    setInterval(createSakura, 1200);
-
-    // Popup surat
+    // Popup
     function showPopup() {
       document.getElementById("popup").classList.add("active");
-      launchConfetti();
+      // Tambah sakura jatuh
+      for (let i = 0; i < 10; i++) createSakura();
+    }
+    function goWhatsApp() {
+      window.location.href = "https://wa.me/6285179956922?text=Iya%20aku%20mau%20jadi%20milikmu%20selamanya%20💖";
     }
 
-    // Confetti
-    function launchConfetti() {
-      for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.top = "-10px";
-        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 5000);
-      }
+    // Sakura jatuh
+    function createSakura() {
+      const sakura = document.createElement("div");
+      sakura.classList.add("sakura");
+      sakura.innerHTML = "🌸";
+      sakura.style.left = Math.random() * window.innerWidth + "px";
+      sakura.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(sakura);
+      setTimeout(() => { sakura.remove(); }, 5000);
     }
-
-    // WhatsApp redirect
-    function goToWhatsApp() {
-      window.location.href = "https://wa.me/6285179956922?text=Iya%20aku%20mau%20❤️";
-    }
+    setInterval(createSakura, 1000);
   </script>
 </body>
 </html>

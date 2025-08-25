@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Untuk Sarah Aulia Marpaung</title>
+  <title>Untuk Lia 💖</title>
   <style>
     body {
       margin: 0;
@@ -13,7 +13,7 @@
       text-align: center;
     }
 
-    /* Background langit malam */
+    /* Canvas bintang */
     canvas#stars {
       position: fixed;
       top: 0;
@@ -34,16 +34,27 @@
       z-index: -1;
     }
     @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
+      to { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Efek sakura */
+    .sakura {
+      position: fixed;
+      top: -10px;
+      font-size: 18px;
+      color: pink;
+      animation: sakuraFall linear forwards;
+      z-index: -1;
+    }
+    @keyframes sakuraFall {
+      to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
 
     /* Konten utama */
     .container {
       position: relative;
       top: 30vh;
+      z-index: 1;
     }
 
     h1 {
@@ -74,28 +85,54 @@
       box-shadow: 0 4px 15px rgba(255, 51, 153, 0.6);
       transition: 0.3s;
     }
-    .btn:hover {
-      transform: scale(1.1);
-    }
+    .btn:hover { transform: scale(1.1); }
 
-    /* Popup surat cinta */
-    .popup {
+    /* Popup surat panjang */
+    .overlay {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: white;
-      color: black;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-      text-align: center;
-      max-width: 400px;
-      transition: transform 0.4s ease-in-out;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.4s;
       z-index: 10;
     }
-    .popup.active {
-      transform: translate(-50%, -50%) scale(1);
+    .overlay.active { visibility: visible; opacity: 1; }
+
+    .letter {
+      background: #fff0f5;
+      color: #ff2e63;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 450px;
+      text-align: left;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+      position: relative;
+      animation: popupScale 0.5s ease forwards;
+    }
+    @keyframes popupScale {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .letter .head {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .letter .body p {
+      margin: 10px 0;
+      line-height: 1.5em;
+    }
+    .letter .actions {
+      text-align: center;
+      margin-top: 15px;
     }
 
     /* Confetti */
@@ -103,30 +140,11 @@
       position: fixed;
       width: 10px;
       height: 10px;
-      background: randomColor;
       animation: confettiFall linear forwards;
+      z-index: 5;
     }
     @keyframes confettiFall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* Sakura/bunga jatuh */
-    .sakura {
-      position: fixed;
-      top: -10px;
-      font-size: 18px;
-      color: pink;
-      animation: sakuraFall linear forwards;
-      z-index: -1;
-    }
-    @keyframes sakuraFall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
+      to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
@@ -137,16 +155,25 @@
     <h1>Hai Sarah Aulia Marpaung 🌸</h1>
     <p>Aku punya satu pertanyaan penting...<br><br>
        Maukah kamu menjadi bagian terindah dalam hidupku? 💖</p>
-    <button class="btn" onclick="showPopup()">Iya 💕</button>
+    <button class="btn" id="openLetter">Iya 💕</button>
     <button class="btn" onclick="alert('Yakin mau nolak? 😢')">Tidak 😢</button>
   </div>
 
-  <!-- Popup Surat -->
-  <div id="popup" class="popup">
-    <h2>💌 Untuk Sarah</h2>
-    <p>Terima kasih sudah menerima aku...<br>
-    Kamu adalah bintang di langit malamku ✨</p>
-    <button class="btn" onclick="goToWhatsApp()">Lanjut ke WhatsApp</button>
+  <!-- Popup surat panjang -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="letter" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+      <div class="head" id="letterTitle">Surat dari seseorang yang menunggumu</div>
+      <div class="body" id="letterBody">
+        <p>Sarah yang tersayang,</p>
+        <p>Aku menulis ini karena setiap kali melihatmu aku merasa tenang. Senyummu mengubah hari-hariku, dan suaramu selalu ingin kuingat. Aku ingin menjadi orang yang membuatmu tertawa, yang menjaga dan mendukungmu kapanpun.</p>
+        <p>Jika kamu mengizinkan, aku ingin memulai cerita indah bersamamu — sederhana, tulus, dan penuh hormat. Kalau hatimu berkata iya, aku janji akan menjaganya dengan sepenuh hati.</p>
+        <p>Selamanya menunggu jawabanmu,<br><strong>— Seseorang yang sangat menyukaimu</strong></p>
+      </div>
+      <div class="actions">
+        <button class="btn no" id="closeLetter">Baca lagi</button>
+        <button class="btn yes" id="sendLetter">Lanjut ke WhatsApp</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -158,85 +185,68 @@
 
     const stars = [];
     for (let i = 0; i < 200; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.5,
-        d: Math.random() * 1
-      });
+      stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.5, d: Math.random() * 1 });
     }
 
     function drawStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "white";
       ctx.beginPath();
-      stars.forEach(star => {
-        ctx.moveTo(star.x, star.y);
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2, true);
-      });
+      stars.forEach(s => { ctx.moveTo(s.x,s.y); ctx.arc(s.x,s.y,s.r,0,Math.PI*2,true); });
       ctx.fill();
-      updateStars();
+      stars.forEach(s => { s.y += s.d; if(s.y>canvas.height){ s.y=0; s.x=Math.random()*canvas.width;} });
     }
+    setInterval(drawStars,50);
 
-    function updateStars() {
-      stars.forEach(star => {
-        star.y += star.d;
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
-      });
-    }
-
-    setInterval(drawStars, 50);
-
-    // Efek hati
+    // Hati jatuh
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      heart.style.left = Math.random()*window.innerWidth+"px";
+      heart.style.animationDuration = (Math.random()*3+2)+"s";
       document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
+      setTimeout(()=>heart.remove(),5000);
     }
-    setInterval(createHeart, 800);
+    setInterval(createHeart,800);
 
-    // Efek sakura
+    // Sakura jatuh
     function createSakura() {
       const sakura = document.createElement("div");
       sakura.className = "sakura";
       sakura.innerHTML = "🌸";
-      sakura.style.left = Math.random() * window.innerWidth + "px";
-      sakura.style.animationDuration = (Math.random() * 5 + 3) + "s";
+      sakura.style.left = Math.random()*window.innerWidth+"px";
+      sakura.style.animationDuration = (Math.random()*5+3)+"s";
       document.body.appendChild(sakura);
-      setTimeout(() => sakura.remove(), 7000);
+      setTimeout(()=>sakura.remove(),7000);
     }
-    setInterval(createSakura, 1200);
+    setInterval(createSakura,1200);
 
     // Popup surat
-    function showPopup() {
-      document.getElementById("popup").classList.add("active");
+    const overlay = document.getElementById("overlay");
+    document.getElementById("openLetter").addEventListener("click",()=>{
+      overlay.classList.add("active");
       launchConfetti();
-    }
+    });
+    document.getElementById("closeLetter").addEventListener("click",()=>{
+      overlay.classList.remove("active");
+    });
+    document.getElementById("sendLetter").addEventListener("click",()=>{
+      window.location.href="https://wa.me/6285179956922?text=Iya%20aku%20mau%20❤️";
+    });
 
     // Confetti
-    function launchConfetti() {
-      for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.top = "-10px";
-        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    function launchConfetti(){
+      for(let i=0;i<50;i++){
+        const confetti=document.createElement("div");
+        confetti.className="confetti";
+        confetti.style.left=Math.random()*window.innerWidth+"px";
+        confetti.style.top="-10px";
+        confetti.style.background=`hsl(${Math.random()*360},100%,50%)`;
+        confetti.style.animationDuration=(Math.random()*3+2)+"s";
         document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 5000);
+        setTimeout(()=>confetti.remove(),5000);
       }
-    }
-
-    // WhatsApp redirect
-    function goToWhatsApp() {
-      window.location.href = "https://wa.me/6285179956922?text=Iya%20aku%20mau%20❤️";
     }
   </script>
 </body>
